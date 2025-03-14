@@ -83,18 +83,31 @@ function draw() {
 }
 
 // 绘制游戏结束画面
+const historyScores = [];
 function drawGameOverScreen() {
     ctx.fillStyle = 'white';
     ctx.font = '20px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText('游戏结束', CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+    ctx.fillText('游戏结束', CANVAS_SIZE / 2, CANVAS_SIZE / 2 - 50);
+
+    // 更新历史分数
+    historyScores.push(score);
+    historyScores.sort((a, b) => b - a);
+
+    // 显示历史积分榜
+    ctx.font = '14px Arial';
+    ctx.fillText('历史积分榜', CANVAS_SIZE / 2, CANVAS_SIZE / 2 - 20);
+    const topScores = historyScores.slice(0, 10);
+    topScores.forEach((score, index) => {
+        ctx.fillText(`${index + 1}. ${score}分`, CANVAS_SIZE / 2, CANVAS_SIZE / 2 + index * 20);
+    });
 
     // 绘制重新开始按钮
     ctx.fillStyle = 'blue';
-    ctx.fillRect(CANVAS_SIZE / 2 - 50, CANVAS_SIZE / 2 + 30, 100, 30);
+    ctx.fillRect(CANVAS_SIZE / 2 - 50, CANVAS_SIZE / 2 + 200, 100, 30);
     ctx.fillStyle = 'white';
     ctx.font = '14px Arial';
-    ctx.fillText('重新开始', CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 50);
+    ctx.fillText('重新开始', CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 220);
 }
 
 // 生成食物
