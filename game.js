@@ -114,6 +114,21 @@ function drawGameOverScreen() {
   ctx.fillStyle = 'white';
   ctx.font = '14px Arial';
   ctx.fillText('重新开始', CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 220);
+
+  // 添加重新开始按钮的点击事件处理
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (
+      x >= CANVAS_SIZE / 2 - 50 &&
+      x <= CANVAS_SIZE / 2 + 50 &&
+      y >= CANVAS_SIZE / 2 + 200 &&
+      y <= CANVAS_SIZE / 2 + 230
+    ) {
+      resetGame();
+    }
+  });
 }
 
 // 生成食物
